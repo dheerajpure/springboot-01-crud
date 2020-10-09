@@ -1,19 +1,23 @@
-    pipeline {
-        agent any
+pipeline {
+    agent any
 
-        stages {
-            stage('checkout') {
-                steps {
-                    git branch: 'development', credentialsId: '723826cf-f009-46f6-bf4e-14271926ddb1', url: 'https://github.com/dheerajpure/springboot-01-crud.git'
-                }
+    environment{
+        
+    }
+    stages {
+        stage('checkout') {
+            steps {
+                git branch: 'development', credentialsId: '723826cf-f009-46f6-bf4e-14271926ddb1', url: 'https://github.com/dheerajpure/springboot-01-crud.git'
             }
+        }
 
-            stage ('Build') {
-                steps {
-                    withMaven{
-                        sh 'mvn -Dmaven.test.failure.ignore=true install'
-                    }
+        stage ('Build') {
+            steps {
+                git url: 'https://github.com/cyrille-leclerc/multi-module-maven-project'
+                withMaven{
+                    bat 'mvn clean install'
                 }
             }
         }
     }
+}
