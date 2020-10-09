@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     stages {
         stage('checkout') {
             steps {
@@ -11,7 +11,7 @@ pipeline {
         stage ('Build') {
             steps {
                 bat 'echo %PATH%'
-                bat 'mvn clean install'
+                bat 'mvn clean install -DskipTests'
             }
         }
     }
